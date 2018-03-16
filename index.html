@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Ibaro Slidriks</title>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, minimum-scale=1" />
+  <link rel="stylesheet" href="src/css/slidriks.min.css">
+	<style>
+  	*{padding: 0;margin: 0;box-sizing: border-box;}
+		.wrap{max-width: 1000px;margin: 0 auto;}
+		.carousel{width: 100%;background-color: #ff0;counter-reset: section;}
+		.carousel--items{height: 300px;font-size: 250px;color: #fff;font-family: Arial;font-weight: bold;overflow: hidden;line-height: 300px;position: relative;}
+		.carousel--items:before{content: counter(section);counter-increment: section;}
+		.carousel--items-1:before{content: '1';}
+		.carousel--items-2:before{content: '2';}
+		.carousel--items-3:before{content: '3';}
+		.carousel--items-4:before{content: '4';}
+		.carousel--items-1{background-color: rgba(0,0,0,.9);}
+		.carousel--items-2{background-color: rgba(0,0,0,.8);}
+		.carousel--items-3{background-color: rgba(0,0,0,.7);}
+		.carousel--items-4{background-color: rgba(0,0,0,.6);}
+		.carousel--items-5{background-color: rgba(0,0,0,.5);}
+		.carousel--items-6{background-color: rgba(100,250,100,.6);}
+		.carousel--items-7{background-color: rgba(100,250,100,.7);}
+		.carousel--items-8{background-color: rgba(100,255,200,.8);}
+		.carousel--items-9{background-color: rgba(100,255,200,.9);}
+		.carousel--items-10{background-color: rgba(100,255,200,.3);}
+		.carousel--items-11{background-color: rgba(0,100,200,.3);}
+		.carousel--items-12{background-color: rgba(200,100,0,.3);}
+		.carousel--items-13{background-color: rgba(55,200,100,.3);}
+
+		.slidriks{width: 100%;overflow: hidden;}
+		.slidriks--move .slidriks__scroll{transition: none;}
+		.slidriks__scroll{display: flex;position: relative;transition: transform .5s;}
+		.slidriks__pages{display: flex;width: 100%;justify-content: center;}
+		.slidriks__pageitem{width: 17px;height: 17px;border-radius: 100%;color: transparent;border-style: none;background-color: #f00;margin: 3px;}
+		.slidriks__pageitem-actvie{background-color: #f0f;}
+		.slidriks__clone{position: absolute;top: 0;height: 100%;}
+		.slidriks__nav{position: relative;}
+		.slidriks__nav button, .slidriks__pages button{outline-style: none;cursor: pointer;}
+		.slidriks__navbutton{position: absolute;border-style: none;background-color: transparent;transform: translateY(-50%);height: 60px;overflow: hidden;}
+		.slidriks__navbutton:before{color: #fff;text-shadow: 0 0 10px #666;font-size: 100px;display: block;transform: translateY(-35px);transition: color 0.3s,text-shadow 0.3s;}
+		.slidriks__navbutton:hover:before{color: #000;text-shadow: 0 0 10px #fff;}
+		.slidriks__navbutton-prev{left: -40px;}
+		.slidriks__navbutton-prev:before{content: '\2039';}
+		.slidriks__navbutton-next{right: -40px;}
+		.slidriks__navbutton-next:before{content: '\203a';}
+	</style>
+</head>
+<body>
+	<main class="main">
+		<div class="wrap">
+			<h1>Slidriks</h1>
+			<div class="carousel" data-slidriks>
+				<div class="carousel--items carousel--items-1"></div>
+				<div class="carousel--items carousel--items-2"></div>
+				<div class="carousel--items carousel--items-3"></div>
+				<div class="carousel--items carousel--items-4"></div>
+				<div class="carousel--items carousel--items-5"></div>
+				<div class="carousel--items carousel--items-6"></div>
+				<div class="carousel--items carousel--items-7"></div>
+				<div class="carousel--items carousel--items-8"></div>
+				<div class="carousel--items carousel--items-9"></div>
+				<div class="carousel--items carousel--items-10"></div>
+				<div class="carousel--items carousel--items-11"></div>
+			</div>
+
+			<!-- <div class="carousel carousel2">
+				<div class="carousel--items carousel--items-1"></div>
+				<div class="carousel--items carousel--items-2"></div>
+				<div class="carousel--items carousel--items-3"></div>
+				<div class="carousel--items carousel--items-4"></div>
+				<div class="carousel--items carousel--items-5"></div>
+				<div class="carousel--items carousel--items-6"></div>
+				<div class="carousel--items carousel--items-7"></div>
+				<div class="carousel--items carousel--items-8"></div>
+				<div class="carousel--items carousel--items-9"></div>
+				<div class="carousel--items carousel--items-10"></div>
+				<div class="carousel--items carousel--items-11"></div>
+				<div class="carousel--items carousel--items-12"></div>
+				<div class="carousel--items carousel--items-13"></div>
+			</div> -->
+		</div>
+	</main>
+	<script src="src/js/slidriks.js"></script>
+	<script>
+		const slide1 = new Slidriks({selector: '[data-slidriks]'});
+		const slide2 = new Slidriks({selector: '.carousel2'});
+	</script>
+	<script>
+		/*document.querySelectorAll('[data-slidriks]').forEach(item => {
+			const contentHTML = item.innerHTML
+			, views = 4
+			, navigate  = true
+			, paginate  = true
+			, width = item.offsetWidth
+			, child = item.children
+			, childSize = child.length
+			, childwidth = width/views
+			;
+			item.classList.add('slidriks-main');
+			item.innerHTML = `<div class="slidriks-slider"><div class="slidriks-wrapper"><div class="slidriks-content" style="width: ${childwidth * childSize}px;transform: translateX(0px);" data-slidriks-x="0">${contentHTML}</div></div><div class="slidriks-controls"><div class="slidriks-navigation"></div><div class="slidriks-paginate"></div></div>`;
+			item.querySelectorAll('.slidriks-content > *').forEach( li => {
+				li.outerHTML= `<div class="slidriks-children" style="width: ${childwidth}px;">${li.outerHTML}</div>`;
+			});
+
+			const content = item.querySelector('.slidriks-content');
+			let slidriksAnimation = null;
+			function slideMove(x){
+				content.classList.add('slidriks-animation');
+				content.dataset.slidriksX = x;
+				content.style.transform = `translateX(${x}px)`;
+				clearTimeout(slidriksAnimation);
+				slidriksAnimation = setTimeout(() => {
+					content.classList.remove('slidriks-animation');
+				}, 310);
+			};
+
+			if(navigate){
+				item.querySelector('.slidriks-navigation').insertAdjacentHTML('beforeend','<div class="slidriks-prev">&#8249;</div><div class="slidriks-next">&#8250;</div>');
+			}
+			if(paginate){
+				const pageLoop = Math.floor(childSize/views) + (childSize%views!==0 ? 1 : 0)
+				for(let i=0; i<pageLoop; i++){
+					item.querySelector('.slidriks-paginate').insertAdjacentHTML('beforeend',`<span class="slidriks-page">${i}</span>`);
+				}
+				item.querySelectorAll('.slidriks-page').forEach( page => {
+					page.addEventListener('click', event => {
+						const index = views * parseInt(page.textContent)
+						, indexChild = content.children[index+views-1] ? content.children[index] : content.children[index - (views-childSize%views)]
+						, itemLeft = indexChild.offsetLeft
+						;
+						slideMove(-itemLeft);
+					});
+				})
+			}
+			item.querySelector('.slidriks-prev').addEventListener('click', event => {
+				const itemLeft = parseFloat(content.style.transform.replace(/translateX\(|px\)/g,'')) + childwidth;
+				if(itemLeft - childwidth >= 0) return;
+				slideMove(itemLeft);
+			});
+			item.querySelector('.slidriks-next').addEventListener('click', event => {
+				const itemLeft = parseFloat(content.style.transform.replace(/translateX\(|px\)/g,'')) - childwidth;
+				if(-(childwidth * childSize - width) - childwidth >= itemLeft) return;
+				slideMove(itemLeft);
+			});
+
+			item.addEventListener('mousedown', event => {
+				item.classList.add('slidriks-mousemove');
+				content.dataset.slidriksClick = event.screenX;
+			});
+			document.addEventListener('mousemove', event => {
+				if(item.classList.contains('slidriks-mousemove')){
+					let current = parseFloat(content.dataset.slidriksX)
+					, click = content.dataset.slidriksClick
+					, move = click - event.screenX
+					, delay = 0
+					;
+					if(current - move > 0){
+						content.style.transform = `translateX(0px)`;
+						return;
+					}
+					if(current - move < -(childwidth * childSize - width)){
+						return;
+					}
+					content.style.transform = `translateX(${current - move + delay}px)`;
+				}
+			});
+			'mouseleave mouseup'.split(' ').map( event => {
+				document.addEventListener(event, () => {
+					if(item.classList.contains('slidriks-mousemove')){
+						const current = parseFloat(content.style.transform.replace(/translateX\(|px\)/g,''))
+						, currentX = Math.abs(current)
+						, itemOffset = Math.floor(currentX / childwidth)
+						, itemIndex = currentX - (itemOffset * childwidth) > (childwidth/2) ? itemOffset + 1 : itemOffset
+						, itemLeft = content.children[itemIndex].offsetLeft
+						;
+						item.classList.remove('slidriks-mousemove');
+						slideMove(-itemLeft);
+					}
+				});
+			});
+		});*/
+	</script>
+</body>
+</html>
